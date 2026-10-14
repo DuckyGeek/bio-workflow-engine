@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service         # Service的名字
+spec:
+  selector:                   # 这个Service转发流量到哪些Pod？
+    app: nginx-demo           # 转发到所有有 app=nginx-demo 标签的Pod
+  ports:
+    - port: 80                # Service监听的端口
+      targetPort: 80          # 转发到Pod的哪个端口
+  type: LoadBalancer          # Service的类型

@@ -1,0 +1,7 @@
+apiVersion: workflow.example.com/v1
+kind: BioTask
+metadata:
+  name: biotask-seqtk-demo
+spec:
+  image: seqtk-task:v1
+  command: ["seqtk", "seq", "-A", "/workspace/test.fasta"]

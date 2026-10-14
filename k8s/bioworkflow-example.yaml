@@ -1,0 +1,24 @@
+apiVersion: workflow.example.com/v1
+kind: BioWorkflow
+metadata:
+  name: test-pipeline
+spec:
+  steps:
+    - name: step-a
+      image: alpine:latest
+      command: ["/bin/sh", "-c", "echo 'Step A: Quality Control...' && sleep 10 && echo 'Step A: QC Done'"]
+
+    - name: step-b
+      image: alpine:latest
+      command: ["/bin/sh", "-c", "echo 'Step B: Alignment...' && sleep 15 && echo 'Step B: Alignment Done'"]
+      dependsOn: ["step-a"]
+
+    - name: step-c
+      image: alpine:latest
+      command: ["/bin/sh", "-c", "echo 'Step C: Variant Calling...' && sleep 20 && echo 'Step C: Variant Calling Done'"]
+      dependsOn: ["step-a"]
+
+    - name: step-d
+      image: alpine:latest
+      command: ["/bin/sh", "-c", "echo 'Step D: Report Generation...' && sleep 5 && echo 'Step D: Report Done'"]
+      dependsOn: ["step-b", "step-c"]

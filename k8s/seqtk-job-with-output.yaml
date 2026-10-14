@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: seqtk-task-with-output
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: seqtk
+          image: seqtk-task:v1
+          imagePullPolicy: Never
+          command: ["/bin/sh", "-c"]
+          args:
+            - "seqtk seq -A /workspace/test.fasta > /workspace/output.fasta && echo '=== Output file content ===' && cat /workspace/output.fasta"

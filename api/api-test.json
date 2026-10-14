@@ -1,0 +1,10 @@
+{
+  "name": "api-test",
+  "steps": [
+    {
+      "name": "step1",
+      "image": "alpine:latest",
+      "command": ["/bin/sh", "-c", "echo hello"]
+    }
+  ]
+}

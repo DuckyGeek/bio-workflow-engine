@@ -1,0 +1,22 @@
+{
+  "name": "test-pipeline",
+  "steps": [
+    {
+      "name": "qc",
+      "image": "staphb/seqtk:latest",
+      "command": ["seqtk", "seq", "-A", "/data/test.fasta"]
+    },
+    {
+      "name": "align",
+      "image": "alpine:latest",
+      "command": ["echo", "Alignment step simulated, reading from previous step..."],
+      "dependsOn": ["qc"]
+    },
+    {
+      "name": "variant",
+      "image": "alpine:latest",
+      "command": ["echo", "Variant calling step simulated, pipeline complete!"],
+      "dependsOn": ["align"]
+    }
+  ]
+}

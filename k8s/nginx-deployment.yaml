@@ -1,0 +1,19 @@
+apiVersion: apps/v1          # Deployment的API版本是apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment      # Deployment的名字
+spec:
+  replicas: 3                 # 期望的Pod副本数
+  selector:                   # 这个Deployment管理哪些Pod？
+    matchLabels:
+      app: nginx-demo         # 它管理所有有 app=nginx-demo 标签的Pod
+  template:                   # Pod模板（相当于Pod的YAML内容）
+    metadata:
+      labels:
+        app: nginx-demo       # 新创建的Pod会打上这个标签
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80

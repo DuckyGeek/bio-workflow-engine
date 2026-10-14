@@ -1,0 +1,19 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: bioworkflow-worker
+spec:
+  scaleTargetRef:
+    name: bio-workflow-controller   # 要伸缩的目标（这里假设控制器是一个 Deployment）
+    kind: Deployment
+  pollingInterval: 10               # 每 10 秒检查一次
+  cooldownPeriod: 60                # 缩容冷却时间 60 秒
+  minReplicaCount: 1                # 最少 1 个副本
+  maxReplicaCount: 10               # 最多 10 个副本
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus-operated.monitoring:9090
+        metricName: bioworkflow_pending_steps
+        threshold: "5"              # 当待执行步骤 > 5 时扩容
+        query: bioworkflow_pending_steps

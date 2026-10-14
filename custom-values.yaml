@@ -1,0 +1,7 @@
+﻿prometheus:
+  prometheusSpec:
+    additionalScrapeConfigs:
+      - job_name: "bio-workflow-controller"
+        static_configs:
+          - targets:
+              - "192.168.10.155:9090"

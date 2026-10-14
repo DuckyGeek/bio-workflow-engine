@@ -1,0 +1,21 @@
+apiVersion: workflow.example.com/v1
+kind: BioWorkflow
+metadata:
+  name: scale-test
+spec:
+  steps:
+    - name: step-1
+      image: alpine:latest
+      command: ["/bin/sh", "-c", "echo 'Step 1' && sleep 5"]
+    - name: step-2
+      image: alpine:latest
+      command: ["/bin/sh", "-c", "echo 'Step 2' && sleep 5"]
+    - name: step-3
+      image: alpine:latest
+      command: ["/bin/sh", "-c", "echo 'Step 3' && sleep 5"]
+    - name: step-4
+      image: alpine:latest
+      command: ["/bin/sh", "-c", "echo 'Step 4' && sleep 5"]
+    - name: step-5
+      image: alpine:latest
+      command: ["/bin/sh", "-c", "echo 'Step 5' && sleep 5"]

@@ -1,0 +1,28 @@
+apiVersion: workflow.example.com/v1
+kind: BioWorkflow
+metadata:
+  name: pvc-test
+spec:
+  steps:
+    # Step A：写入文件到共享存储
+    - name: step-a
+      image: alpine:latest
+      command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Step A: Writing to shared storage..."
+          echo "QC passed, sample OK" > /workspace/data/qc-result.txt
+          echo "Step A: Done"
+
+    # Step B：从共享存储读取文件
+    - name: step-b
+      image: alpine:latest
+      command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Step B: Reading from shared storage..."
+          cat /workspace/data/qc-result.txt
+          echo "Step B: Done"
+      dependsOn: ["step-a"]

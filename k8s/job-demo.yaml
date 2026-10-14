@@ -1,0 +1,13 @@
+apiVersion: batch/v1        # Job的API版本是batch/v1
+kind: Job
+metadata:
+  name: bio-task-demo
+spec:
+  template:                  # Pod模板
+    spec:
+      restartPolicy: Never   # Job特有：Pod结束后不重启
+      containers:
+        - name: bio-task
+          image: alpine:latest
+          command: ["/bin/sh", "-c"]
+          args: ["echo 'Processing genome sample...' && sleep 30 && echo 'Done'"]
